@@ -15,6 +15,13 @@
  */
 #include "quantum.h"
 
+const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0,6, HSV_WHITE}
+);     
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    my_capslock_layer
+);
+
 // Optional override functions below.
 // You can leave any or all of these undefined.
 // These are only required if you want to perform custom actions.
@@ -24,13 +31,13 @@ void matrix_init_kb(void) {
   // put your keyboard start-up code here
   // runs once when the firmware starts up
 
-  gpio_set_pin_output(C7);
+  rgblight_layers = my_rgb_layers;
   matrix_init_user();
 }
 
 bool led_update_kb(led_t led_state) {
   if(led_update_user(led_state)) {
-    gpio_write_pin(C7, !led_state.caps_lock);
+    rgblight_set_layer_state(0, led_state.caps_lock);
   }
   return true;
 }

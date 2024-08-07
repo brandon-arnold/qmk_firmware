@@ -13,6 +13,10 @@
         "brightness_steps": 8,
         "led_count": 22,
         "sleep": true,
+        "layers": {
+            "enabled": true,
+            "override_rgb": true
+        },
         "animations": {
             "breathing": true,
             "rainbow_mood": true,
